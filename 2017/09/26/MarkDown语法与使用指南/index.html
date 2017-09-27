@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>MarkDown语法与使用指南 - Geolage's Blog</title><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"><script>var GLOBAL = { 
+  root: '/blog/',
+  algolia: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script><link rel="icon" href="/blog/favicon.ico"></head><body><canvas class="fireworks"></canvas><i class="fa fa-bars" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#MarkDown语法"><span class="toc-number">1.</span> <span class="toc-text">MarkDown语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本语法"><span class="toc-number">1.1.</span> <span class="toc-text">基本语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用语法"><span class="toc-number">1.2.</span> <span class="toc-text">常用语法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用指南"><span class="toc-number">2.</span> <span class="toc-text">使用指南</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/blog//img/avatar.jpg"></div><div class="author-info__name text-center">Geolage Wu</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/blog/archives"><span class="pull-left">文章</span><span class="pull-right">2</span></a><a class="author-info-articles__tags article-meta" href="/blog/tags"><span class="pull-left">标签</span><span class="pull-right">3</span></a><a class="author-info-articles__categories article-meta" href="/blog/categories"><span class="pull-left">分类</span><span class="pull-right">1</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">相关链接</div><a class="author-info-links__name text-center" href="https://www.higherloft.com" target="_blank">HigherLoft</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/blog/img/top2.jpg);"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/blog/">Geolage's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/blog/">主页</a><a class="site-page" href="/blog/archives">文章</a><a class="site-page" href="/blog/tags">标签</a><a class="site-page" href="/blog/categories">分类</a></span></div><div id="post-info"><div id="post-title">MarkDown语法与使用指南</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-09-26 </time><span class="post-meta__separator"> | </span><i class="fa fa-inbox" aria-hidden="true"> </i><a class="post-meta__categories" href="/blog/categories/编辑器/"> 编辑器  </a><span class="post-meta__separator"> | </span><i class="fa fa-comment-o" aria-hidden="true"> </i><a href="/blog/2017/09/26/MarkDown语法与使用指南/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2017/09/26/MarkDown语法与使用指南/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div id="post-content"><p>&emsp;&emsp;Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此有很多人用它写博客。目前世界上绝大多数流行的博客平台都能很好的支持Markdown。</p>
+<p>&emsp;&emsp;除此之外，我们还可以通过一些功能强大的编辑器快速将Markdown转化为演讲PPT、Word产品文档、LaTex论文甚至是用非常少量的代码完成最小可用原型。在数据科学领域，Markdown已经被确立为科学研究规范，极大地推进了动态可重复性研究的历史进程。<br><a id="more"></a></p>
+<h2 id="MarkDown语法"><a href="#MarkDown语法" class="headerlink" title="MarkDown语法"></a><strong>MarkDown语法</strong></h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a><strong>基本语法</strong></h3><ol>
+<li><p>标题（Title）</p>
+<p> A. 通过在<strong>文字下方（换行）</strong>输入 <code>=</code> 或 <code>-</code>，以使用<strong>一级</strong>标题或<strong>二级</strong>标题。</p>
+<p> B. 在<strong>文字前面</strong>加上 <code>#</code>，通过“#”数量来表示标题级别。</p>
+<p> p.s. 有1~6级标题，其中1级标题字体最大。</p>
+</li>
+<li><p>块注释（Blockquote）</p>
+<p> 通过在文字开头添加 <code>&gt;</code> 表示块注释。</p>
+<p> p.s. 当&gt;和文字之间有五个blank时，块注释的文字会发生变化。</p>
+</li>
+<li><p>粗体（Bold）</p>
+<p> 使用2个 <code>*</code> 或者 <code>_</code> 将相应的文字包裹起来即可。</p>
+</li>
+<li><p>斜体（Italics）</p>
+<p> 使用1个 <code>*</code> 或者 <code>_</code> 将相应的文字包裹起来即可。</p>
+</li>
+<li><p>有序列表（ol）</p>
+<p> 使用数字加英文句号再加上空格来表示序号，如 <code>1.</code> + <code>space</code> 。</p>
+</li>
+<li><p>无序列表（ul）</p>
+<p> 在文字开头添加(*, +, and -)以实现无序列表。但需要注意的是，(*, +, and -)和文字之间也需要添加空格。<br> （建议：一个文档中只是用一种无序列表的表示方式）</p>
+</li>
+<li><p>嵌套列表（el）</p>
+<p> 可在列表li文字前选择输入 <code>-</code>  、 <code>+</code>  或  <code>*</code> ，并在后面加上 <code>space</code> 来表示。</p>
+<p> 其中， <code>-</code> 为列表父li ； <code>+</code> 为列表子li ； <code>*</code> 则为列表通用li。</p>
+<p> <code>-</code> 、<code>+</code> 、<code>*</code>  可循环使用，但符号之后的空格不能少，符号之前的空格也不能少。</p>
+<p> e.g. :    </p>
+ <figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>嵌套列表1</div><div class="line"> 	  + 嵌套列表2</div><div class="line"> 	  + 嵌套列表3</div><div class="line"> 	  - 嵌套列表4</div><div class="line"> 	  * 嵌套列表5</div><div class="line">   - 嵌套列表6</div></pre></td></tr></table></figure>
+<ul>
+<li>嵌套列表1<ul>
+<li>嵌套列表2</li>
+<li>嵌套列表3</li>
+</ul>
+<ul>
+<li>嵌套列表4</li>
+</ul>
+<ul>
+<li>嵌套列表5</li>
+</ul>
+</li>
+<li>嵌套列表6<br><br></li>
+</ul>
+</li>
+<li><p>链接（Links）</p>
+<p> Markdown中有两种方式实现链接，分别为内联方式和引用方式。</p>
+<p> 内联方式：This is an <a href="http://example.com/" target="_blank" rel="external">example link</a>.</p>
+<p> 引用方式：I get 10 times more traffic from <a href="http://google.com/" title="Google" target="_blank" rel="external">Google</a> than from <a href="http://search.yahoo.com/" title="Yahoo Search" target="_blank" rel="external">Yahoo</a> or <a href="http://search.msn.com/" title="MSN Search" target="_blank" rel="external">MSN</a>. </p>
+<p> 格式分别为：</p>
+<p> 内联： <code>[</code> + <code>链接显示标题</code> + <code>]</code> + <code>(</code> + <code>URL</code> + <code>)</code></p>
+<p> 引用： <code>[</code> + <code>链接显示标题</code> + <code>]</code> + <code>[</code> + <code>n（序号）</code>+<code>]</code>  +<code>（一些文字 ...）</code></p>
+<p> &emsp;&emsp; &emsp;<code>（建议写在文章末尾：）</code>  <code>[1]</code> + <code>:</code> + <code>URL</code> + <code>space</code> + <code>&quot;</code> + <code>标题</code> + <code>&quot;</code></p>
+<p> &emsp; &emsp;&emsp;<code>（此处省略n条引用记录...）</code></p>
+<p> &emsp;&emsp;&emsp;&nbsp;<code>（第n条引用：）</code> <code>[n]</code> + <code>:</code> + <code>URL</code> + <code>space</code> + <code>&quot;</code> + <code>标题</code> + <code>&quot;</code></p>
+</li>
+<li><p>图片（Image）</p>
+<p> 图片的引用方式和链接的相似。</p>
+<p> 内联方式： <code>![alt text](/path/to/img.jpg &quot;Title&quot;)</code></p>
+<p> 引用方式： <code>![alt text][id]</code></p>
+<p> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<code>[id]: /path/to/img.jpg &quot;Title&quot;</code></p>
+</li>
+<li><p>代码（Code）</p>
+<p>A. 简单文字需要一个代码框。使用<code>&lt;blockquote&gt;</code>，即反引号( ` )；</p>
+<p>B. 一大段代码需要标记，则可以将代码用3个反引号包裹起来。如果要包裹多个反引号，<br>&emsp;则可用与包裹数不同的反引号进行包裹，注意内容与包裹标记之间以空格分割；</p>
+<p>C. 大片文字需要实现代码框，可使用Tab和四个空格。</p>
+</li>
+<li><p>脚注（footnote）</p>
+<p>e.g.：Test <a href="TestText">About</a></p>
+<p>实现方式： <code>脚注标题</code>+<code>[</code>+<code>脚注标题</code>+<code>]</code></p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;<code>(另起一行：)</code> <code>[</code>+<code>脚注标题</code>+<code>]</code>+<code>:</code> +<code>脚注内容</code></p>
+</li>
+</ol>
+<h3 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a><strong>常用语法</strong></h3><ol>
+<li><p>分割线（Split）</p>
+<p> 另起一行，输入三个或以上的 <code>*</code> <code>-</code> 或 <code>_</code> 来建立一条分隔线。其中，<code>-</code> 后需要加空格，其它可加或不加。</p>
+</li>
+<li><p>表格（Table）</p>
+<p> 单元格的格式：以 <code>|</code> 分割左右内容作为表格的单元格。<br> 表格数据对齐：在插入表格数据的前一行的空白单元格内使用 <code>:-</code> <code>:-:</code> <code>-:</code> 来分别定义左对齐、居中、右对齐的对齐方式。</p>
+ <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">|    设备    |   价格   |  数量  |</div><div class="line">| :- | :-: | -: |</div><div class="line">|  Surface   |  ￥6000  |   1    |</div><div class="line">| SmartPhone |  ￥5000  |   2    |</div><div class="line">|     PC     |  ￥8000  |   3    |</div></pre></td></tr></table></figure>
+<p><table><tr><th width="100">设备</th><th width="60" style="text-align:center">价格</th><th width="50">数量</th></tr><tr><td>Surface</td><td style="text-align:center">￥6000</td><td>1</td></tr><tr><td>SmartPhone</td><td style="text-align:center">￥5000</td><td>2</td></tr><tr><td>PC</td><td style="text-align:center">￥8000</td><td>3</td></tr></table><br></p>
+</li>
+<li><p>删除线(Line-through)</p>
+<p> 在文字内容前后输入2个 <code>~</code> 即可。</p>
+</li>
+<li><p>缩进（Indent）</p>
+<p> A. 半角大的空白：输入 <code>&amp;ensp;</code> 或 <code>&amp;#8194;</code> ；</p>
+<p>   B. 全角大的空白：输入 <code>&amp;emsp;</code> 或 <code>&amp;#8195;</code> ；</p>
+<p>   C. 不间断的空白：输入 <code>&amp;nbsp;</code> 或 <code>&amp;#160;</code> ；</p>
+</li>
+<li><p>字体、字号、颜色</p>
+<p> 将需要套用格式的文字用 <code>&lt;font&gt;</code> <code>&lt;/font&gt;</code> 包裹，并在标签内添加相应的属性：</p>
+<p> <code>face</code> <code>color</code> <code>size</code> 分别代表字体、颜色和字号，根据需要可以自己设置对应的值。</p>
+<p> e.g.： <code>&lt;font face=&quot;微软雅黑&quot; color=red size=5&gt;栗子&lt;/font&gt;</code> &emsp;   outcome： <font face="微软雅黑" color="red" size="5">栗子</font></p>
+</li>
+<li><p>其他标记</p>
+<p> A. 换行：在内容后面插入<code>&lt;br/&gt;</code>即可；</p>
+<p> B. 下划线：将内容以 <code>&lt;u&gt;</code> <code>&lt;/u&gt;</code> 包裹即可。 </p>
+<p> 详细语法请参考查阅：<a href="http://blog.leanote.com/post/freewalk/Markdown-%E8%AF%AD%E6%B3%95%E6%89%8B%E5%86%8C" target="_blank" rel="external">MarkDown语法手册 - 梵居闹市</a> &amp; <a href="https://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">MarkDown Syntax</a></p>
+</li>
+</ol>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a><strong>使用指南</strong></h2><ol>
+<li><p>一般情况建议使用<code>tab</code>进行缩进排版，次要情况才选择上述的缩进符号。</p>
+</li>
+<li><p>代码用代码片标记进行包裹，才有语法高亮。您也可以使用<code>&lt;font color= &gt;</code> <code>&lt;/font&gt;</code> 的标记对文字进行颜色标记，增加可读性。</p>
+</li>
+<li><p>请别忘记对特殊符号进行转义，如反引号 <code>` </code> ，一个或多个的用法需留意。</p>
+</li>
+<li><p>有关数学公式、流程图等的应用需多多查阅博客或问答，掌握使用技巧。</p>
+</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info">Geolage Wu</span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info">https://geolage.github.io/blog/2017/09/26/MarkDown语法与使用指南/</span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/MarkDown/">MarkDown</a><a class="post-meta__tags" href="/blog/tags/md编辑器/">md编辑器</a><a class="post-meta__tags" href="/blog/tags/md语法/">md语法</a></div></article><nav id="pagination"><div class="next-post pull-right"><a href="/blog/2017/09/25/hello-world/"><span>Hello World</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var disqus_config = function () {
+  this.page.url = 'https://geolage.github.io/blog/2017/09/26/MarkDown语法与使用指南/';
+  this.page.identifier = '2017/09/26/MarkDown语法与使用指南/';
+  this.page.title = 'MarkDown语法与使用指南';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://geolage.disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://geolage.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">©2014 - 2017 By Geolage Wu</div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/blog/js/third-party/anime.min.js"></script><script src="/blog/js/third-party/jquery.min.js"></script><script src="/blog/js/third-party/jquery.fancybox.min.js"></script><script src="/blog/js/third-party/velocity.min.js"></script><script src="/blog/js/third-party/velocity.ui.min.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/fancybox.js"></script><script src="/blog/js/sidebar.js"></script><script src="/blog/js/copy.js"></script><script src="/blog/js/fireworks.js"></script><script src="/blog/js/transition.js"></script><script src="/blog/js/scroll.js"></script><script src="/blog/js/head.js"></script><script src="/blog/js/main.js"></script></body></html>

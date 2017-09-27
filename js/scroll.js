@@ -11,14 +11,9 @@ $(function () {
       // head position
       findHeadPosition(currentTop)
     }
-    var isUp = scrollDirection(currentTop)
-    if (currentTop > 56) {
-      if (isUp) {
-        $('#page-header').hasClass('visible') ? $('#page-header').removeClass('visible') : console.log()
-      } else {
-        $('#page-header').hasClass('visible') ? console.log() : $('#page-header').addClass('visible')
-      }
-      $('#page-header').addClass('fixed')
+    var isUp = scrollDirection(currentTop),img_h=($('#nav').css('height')||$('#top-container').css('height')).slice(0,-2);
+    if (currentTop > img_h) {
+      $('#page-header').addClass('fixed');
       if ($('#go-up').css('opacity') === '0') {
         $('#go-up').velocity('stop').velocity({
           translateX: -30,
