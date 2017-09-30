@@ -4,11 +4,11 @@ This is a blog demo on github pages.
 
 ## Come On In
 
-Just simply click [here]() to view this blog app!
+Just simply click [here]( https://geolage.github.io/blog/) to view this blog app!
 
 Without any reaction? Please clip the link below and paste onto the site bar then pay a visit.
 
-Link: https://github.com/Geolage/blog
+Link:  https://geolage.github.io/blog
 
 Several articles have been published into the blog, more articles are on the way!
 
