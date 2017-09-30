@@ -19,7 +19,7 @@ $(function () {
 		})
 	}
 	$(document).on('click', function (e) {
-		if ($('#toggle-sidebar').hasClass('on') && e.pageX > 300) {
+		if ($('#toggle-sidebar').hasClass('on') && e.pageX > 300 && e.target.id!=='go-up') {
 			$('#toggle-sidebar').removeClass('on');
 			sidebarHide();
 		}
