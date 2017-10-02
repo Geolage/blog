@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>图解CSS3 Flexbox属性（转） - Geolage's Blog</title><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"><script>var GLOBAL = { 
+  root: '/blog/',
+  algolia: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script><link rel="icon" href="/blog/favicon.ico"></head><body><canvas class="fireworks"></canvas><i class="fa fa-bars" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于Flexbox"><span class="toc-number">1.</span> <span class="toc-text">关于Flexbox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础知识"><span class="toc-number">2.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用方法"><span class="toc-number">3.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex容器属性"><span class="toc-number">4.</span> <span class="toc-text">flex容器属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-direction"><span class="toc-number">4.1.</span> <span class="toc-text">flex-direction</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-wrap"><span class="toc-number">4.2.</span> <span class="toc-text">flex-wrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-flow"><span class="toc-number">4.3.</span> <span class="toc-text">flex-flow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#justify-content"><span class="toc-number">4.4.</span> <span class="toc-text">justify-content</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-items"><span class="toc-number">4.5.</span> <span class="toc-text">align-items</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-content"><span class="toc-number">4.6.</span> <span class="toc-text">align-content</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flex容器无效属性"><span class="toc-number">5.</span> <span class="toc-text">flex容器无效属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flex项目属性"><span class="toc-number">6.</span> <span class="toc-text">Flex项目属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#order"><span class="toc-number">6.1.</span> <span class="toc-text">order</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-grow"><span class="toc-number">6.2.</span> <span class="toc-text">flex-grow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-shrink"><span class="toc-number">6.3.</span> <span class="toc-text">flex-shrink</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex-basis"><span class="toc-number">6.4.</span> <span class="toc-text">flex-basis</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex"><span class="toc-number">6.5.</span> <span class="toc-text">flex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#align-self"><span class="toc-number">6.6.</span> <span class="toc-text">align-self</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flex项目无效属性"><span class="toc-number">6.7.</span> <span class="toc-text">flex项目无效属性</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/blog//img/avatar.jpg"></div><div class="author-info__name text-center">Geolage Wu</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/blog/archives"><span class="pull-left">文章</span><span class="pull-right">8</span></a><a class="author-info-articles__tags article-meta" href="/blog/tags"><span class="pull-left">标签</span><span class="pull-right">23</span></a><a class="author-info-articles__categories article-meta" href="/blog/categories"><span class="pull-left">分类</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">相关链接</div><a class="author-info-links__name text-center" href="https://www.higherloft.com" target="_blank">HigherLoft</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/blog/img/top2.jpg);"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/blog/">Geolage's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/blog/">主页</a><a class="site-page" href="/blog/archives">文章</a><a class="site-page" href="/blog/tags">标签</a><a class="site-page" href="/blog/categories">分类</a></span></div><div id="post-info"><div id="post-title">图解CSS3 Flexbox属性（转）</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-01 </time><span class="post-meta__separator"> | </span><i class="fa fa-inbox" aria-hidden="true"> </i><a class="post-meta__categories" href="/blog/categories/前端/"> 前端  </a><i class="fa fa-angle-right" aria-hidden="true"> </i><i class="fa fa-inbox" aria-hidden="true"> </i><a class="post-meta__categories" href="/blog/categories/前端/CSS/"> CSS  </a><span class="post-meta__separator"> | </span><i class="fa fa-comment-o" aria-hidden="true"> </i><a href="/blog/2017/10/01/图解CSS3-Flexbox属性（转）/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2017/10/01/图解CSS3-Flexbox属性（转）/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div id="post-content"><p>&emsp;&emsp;近期的项目之中遇到不少关于<code>display</code>布局的问题，<code>flexbox</code>这一弹性布局相信也深受大家的热爱，已经有很多人在开发中使用了，效果也发挥出色。在网上看了看，发现有两篇关于Flexbox的文章，其中一篇是<strong>大漠</strong>老师写的，我选择了转载到此；另一篇是<strong>阮一峰</strong>老师写的，可以点击 <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">这里</a> 跳转查看。其两者虽然较为相似，但都写得非常详细和基础，适合新手入门，当然也非常适合老手不定期回看以加深印象。这篇关于CSS3的Flexbox属性以及一些简单的布局已经写的非常全面了。故在此进行转载，方便各位读者学习和交流。<br><a id="more"></a></p>
+<h2 id="关于Flexbox"><a href="#关于Flexbox" class="headerlink" title="关于Flexbox"></a><strong>关于Flexbox</strong></h2><p><a href="http://www.w3cplus.com/blog/tags/157.html" target="_blank">Flexbox布局</a>官方称之为<a href="http://www.w3.org/TR/css-flexbox/" target="_blank">CSS Flexible Box布局模块</a>,是CSS3中的一种新的布局模式。Flexbox可以控制未知容器元素的对齐方式，排列方向，排列顺序等，甚至是在未知大小的容器也能这样做。Flex容器的主要特点是能够修改其子元素（Flex item）的宽度或高度，使其在不同的屏幕尺寸中填补可用的空间。</p>
+<p>许多设计人员和开发人员发现使用Flexbox来布局更容易，可以使用更少的代码，更简单的方式实现更复杂的布局，也使整个开发过程更为简单。Flexbox布局算法基于水平或垂直的块或行内元素来布局。Flexbox布局常用于小的应用程序组件之中，而<a href="http://www.w3cplus.com/blog/tags/355.html" target="_blank">CSS Grid布局模块</a>将应用于大规模的布局之中。</p>
+<p>接下来的内容，将使用图解方式向大家阐述<code>flex</code>属性是如何工作，又是如何影响布局方式。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a><strong>基础知识</strong></h2><p>在介绍flexbox属性之前，先简单介绍flexbox模块。Flex布局主要有父容器和它的直接子元素组成，其中父容器被称之为<strong>flex容器</strong>，而其直接的子元素称作为<strong>flex项目</strong>。</p>
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/CSS3-Flexbox-Model.jpg" alt="基础知识" title="基础知识"></p>
+
+<p>上图你可以看到Flexbox的属性以及描述flex容器和flex项目的术语。如果你想了解有关这方面更详细的信息，可以阅读<a href="http://www.w3.org/TR/css-flexbox/#box-model" target="_blank">W3C官方中有关于Flexbox模块的相关资料</a>。</p>
+
+<p>从2009年提供的最初草案开始，Flexbox布局经历了多次的迭代和几个语法版本的变更。为了避免混淆，我们这里介绍的相关语法都只使用了2014年9月份提供的最新工作草案。如果你需要维护旧的浏览器兼容性，你可以仔细阅读这篇<a href="https://css-tricks.com/using-flexbox/" target="_blank">文章</a>。</p>
+
+<blockquote><br>  <p>如何让 flexbox 兼容旧的浏览器兼容性相关的中文文章，可以阅读这篇<a href="http://www.w3cplus.com/css3/using-flexbox.html" target="_blank">文章</a>。</p><br></blockquote>
+
+<p>浏览器对最新flexbox规范的支持情况：</p>
+
+<ul><br><li>Chrome 29+</li><br><li>Firefox 28+</li><br><li>Internet Explorer 11+</li><br><li>Opera 17+</li><br><li>Safari 6.1+ (prefixed with <code>-webkit-</code>)</li><br><li>Android 4.4+</li><br><li>iOS 7.1+ (prefixed with <code>-webkit-</code>)</li><br></ul>
+
+<p>有关于更详细的兼容性，可以阅读下表：</p>
+
+<div style="margin-bottom:20px;"><iframe height="370" src="http://caniuse.com/flexbox/embed" width="100%"></iframe></div>
+
+<blockquote><br>  <p>结过实战，flexbox相关属性在移动端运用中，对2009年的语法规范支持度较强，而最新语法部分属性在移动端支持较差。如果要在移动端使用此属性，建议使用2009年语法版本。</p><br></blockquote>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a><strong>使用方法</strong></h2><p>使用Flexbox布局只要在父容器元素上设置<code>display</code>属性：</p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">display</span></span></span><span class="rule">:<span class="value"><span class="value"> -webkit-flex;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">display</span></span></span><span class="rule">:<span class="value"><span class="value"> flex;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>如果你想将其设置为一个内联元素时，可以像下面这样使用：</p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">display</span></span></span><span class="rule">:<span class="value"><span class="value"> -webkit-inline-flex;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">display</span></span></span><span class="rule">:<span class="value"><span class="value"> inline-flex;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p><strong>注意：</strong>这属性只要设置在父容器上，其所有子元素将自动成为Flex项目。</p>
+
+<p>有几tkih方法可以将flexbox属性分成组，到目为止，我发现了解flexbox属性项最简单的方法是将flexbox属性分成两个组：<strong>flex容器</strong>和<strong>flex项目</strong>。下面我们将分组来解释他们是如何影响布局。</p>
+
+<h2 id="flex容器属性"><a href="#flex容器属性" class="headerlink" title="flex容器属性"></a><strong>flex容器属性</strong></h2><h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a><strong><code>flex-direction</code></strong></h3><p>这个属性主要设置flex容器的主轴方向，指定flex项目在flex容器中的排列方式。flex容器的主轴方向主要有水平和纵向两种。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value"> row;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value">         row;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>flex项目在<code>ltr</code>上下文中从左向右排在一行：</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-direction-row.jpg" alt="flex-direction" title="flex-direction"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value"> row-reverse;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value">         row-reverse;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>flex项目在<code>rtl</code>上下文中从右向左排在一行：</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-direction-row-reverse.jpg" alt="flex-direction" title="flex-direction"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value"> column;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value">         column;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>flex项目从上到下排在一列中：</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-direction-column.jpg" alt="flex-direction" title="flex-direction"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value"> column-reverse;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-direction</span></span></span><span class="rule">:<span class="value"><span class="value">         column-reverse;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>flex项目从下到上排在一列中：</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-direction-column-reverse.jpg" alt="flex-direction" title="flex-direction"></p>
+
+<p>其默认值为：<code>row</code></p>
+
+<p><strong>注意：</strong><code>row</code>和<code>row-reverse</code>依赖其写作模式，如果在<code>rtl</code>上下文方式下，他们都将分别被逆转。</p>
+
+<h3 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a><strong><code>flex-wrap</code></strong></h3><p>flex项目在flex容器中默认是只显示一行。如果希望控制flex项目在flex容器中按一行或多行排列，可以使用<code>flex-wrap</code>属性。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value"> nowrap;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value">         nowrap;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目在flex容器中显示成一行，flex项目什么自动缩减来适应flex容器的宽度。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-wrap-nowrap.jpg" alt="flex-wrap" title="flex-wrap"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value"> wrap;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value">         wrap;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目从左到右和从上到下在flex容器中多行显示。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-wrap-wrap.jpg" alt="flex-wrap" title="flex-wrap"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value"> wrap-reverse;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">flex-wrap</span></span></span><span class="rule">:<span class="value"><span class="value">         wrap-reverse;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目从左到右和从下到上在flex容器中多行显示：</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-wrap-wrap-reverse.jpg" alt="flex-wrap" title="flex-wrap"></p>
+
+<p>默认值：<code>nowrap</code></p>
+
+<p><strong>注意：</strong> 这些属性依赖于写作模式，在<code>rtl</code>上下文背景这，他们将分别被逆转。</p>
+
+<h3 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a><strong><code>flex-flow</code></strong></h3><p>这个属性是<code>flex-direction</code>和<code>flex-wrap</code>属性的简写。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="javascript"><code class="javascript">.flex-container {
+  -webkit-flex-flow: <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">flex-direction</span></span>&gt;</span></span></span><span class="xml"> || <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-wrap</span></span>&gt;</span></span>;</span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  flex-flow:         <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">flex-direction</span></span>&gt;</span></span></span><span class="xml"> || <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-wrap</span></span>&gt;</span></span>;</span></span>
+}
+</code></pre>
+
+<p>默认值：<code>row nowrap</code></p>
+
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a><strong><code>justify-content</code></strong></h3><p><code>justify-content</code>属性用来指定flex项目在flex容器沿着主轴在当前行的对齐方式。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-justify-content</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-start;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">justify-content</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-start;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>在<code>ltr</code>上下文方式下，flex项目向flex容器的左边靠齐。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-justify-content-flex-start.jpg" alt="justify-content" title="justify-content"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-justify-content</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-end;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">justify-content</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-end;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>在<code>ltr</code>上下文方式下，flex项目向flex容器的右边靠齐。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-justify-content-flex-end.jpg" alt="justify-content" title="justify-content"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-justify-content</span></span></span><span class="rule">:<span class="value"><span class="value"> center;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">justify-content</span></span></span><span class="rule">:<span class="value"><span class="value">         center;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目在flex容器中居中对齐。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-justify-content-center.jpg" alt="justify-content" title="justify-content"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-justify-content</span></span></span><span class="rule">:<span class="value"><span class="value"> space-between;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">justify-content</span></span></span><span class="rule">:<span class="value"><span class="value">         space-between;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目之间间距相对，第一个和最后一个flex项目向flex容器的边缘对齐。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-justify-content-space-between.jpg" alt="justify-content" title="justify-content"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-justify-content</span></span></span><span class="rule">:<span class="value"><span class="value"> space-around;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">justify-content</span></span></span><span class="rule">:<span class="value"><span class="value">         space-around;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目前后相等的空间显示在flex容器中。</p>
+
+<blockquote><br>  <p>第一个Flex项目左边的间距和最后一个Flex项目右边的间距是其他相相邻flex项目之间间的一半。</p><br></blockquote>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-justify-content-space-around.jpg" alt="justify-content" title="justify-content"></p>
+
+<p>默认值：<code>flex-start</code></p>
+
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a><strong><code>align-items</code></strong></h3><p>Flex项目在容器侧轴对齐方式，类似于<code>justify-content</code>，只不过不是水平方向，而是纵向。这个属性可以设置所有flex项目对齐方式，并且包括匿名元素。</p>
+
+<p><strong>属性值:</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-items</span></span></span><span class="rule">:<span class="value"><span class="value"> stretch;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-items</span></span></span><span class="rule">:<span class="value"><span class="value">         stretch;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目沿着flex容器侧轴方向填满整个flex容器高度（或宽度）</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-items-stretch.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-items</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-start;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-items</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-start;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目排列在flex容器侧轴开始处。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-items-flex-start.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-items</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-end;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-items</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-end;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目排列在flex容器侧轴结束处。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-items-flex-end.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-items</span></span></span><span class="rule">:<span class="value"><span class="value"> center;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-items</span></span></span><span class="rule">:<span class="value"><span class="value">         center;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目排列在flex容器侧轴中间处</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-items-center.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-items</span></span></span><span class="rule">:<span class="value"><span class="value"> baseline;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-items</span></span></span><span class="rule">:<span class="value"><span class="value">         baseline;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目按文本基线在flex容器侧轴中排列。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-items-baseline.jpg" alt="align-items" title="align-items"></p>
+
+<p>默认值：<code>stretch</code></p>
+
+<p><strong>注意：</strong>有关于基线对齐方式更多细节可以点击<a href="http://www.w3.org/TR/css-flexbox/#flex-baselines" target="_blank">这里</a>。</p>
+
+<h3 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a><strong><code>align-content</code></strong></h3><p><code>align-content</code>属性将flex容器内的行在flex容器中侧轴排列方式，类似于<code>justify-content</code>在主轴方向的单个Flex项目对齐方式。</p>
+
+<blockquote><br>  <p>Flex项目在flex容器中多行显示行，其多行在flex容器的侧轴方向对齐方式。</p><br></blockquote>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> stretch;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         stretch;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目行在flex容器侧轴按分布式空间排列，</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-stretch.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-start;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-start;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目在flex容器侧轴开始处排列。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-flex-start.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> flex-end;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         flex-end;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目在flex容器侧轴末尾处排列。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-flex-end.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> center;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         center;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目行沿flex容器侧轴中间排列。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-center.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> space-between;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         space-between;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目行与行之间间距相等，并且flex项目行第一行排在flex容器侧轴开始之处，flex项目行最后一行排在flex容器侧轴末尾之处。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-space-between.jpg" alt="align-items" title="align-items"></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-container</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-content</span></span></span><span class="rule">:<span class="value"><span class="value"> space-around;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-content</span></span></span><span class="rule">:<span class="value"><span class="value">         space-around;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>Flex项目行的上下间距相等，并且沿flex容器侧轴排列。</p>
+
+<blockquote><br>  <p>Flex项目行上下间距相等，并且flex容器第一行距flex容器侧轴开始处间距是flex项目行与行之间间距一半。同时项目行最后一行距flex容器侧轴末尾处间距是flex项目行与行之间间距一半。</p><br></blockquote>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-content-space-around.jpg" alt="align-items" title="align-items"></p>
+
+<p>默认值：<code>stretch</code></p>
+
+<p><strong>注意：</strong>这个属性只有当flex容器有多行flex项目时才生效，如果flex容器只有一行flex项目，这个属性没有效果。</p>
+
+<h2 id="flex容器无效属性"><a href="#flex容器无效属性" class="headerlink" title="flex容器无效属性"></a><strong>flex容器无效属性</strong></h2><ul><br><li>所有<code>column-*</code>属性在flex容器上都不生效</li><br><li>flex容器上不能使用<code>::first-line</code>和<code>::first-letter</code>伪元素</li><br></ul>
+
+<h2 id="Flex项目属性"><a href="#Flex项目属性" class="headerlink" title="Flex项目属性"></a><strong>Flex项目属性</strong></h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a><strong><code>order</code></strong></h3><p><code>order</code>属性是用来控制flex容器中flex项目的排列顺序。默认情况flex项目在flex容器的顺序是flex项目出现的顺序。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="javascript"><code class="javascript">.flex-item {
+  -webkit-order: <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">integer</span></span>&gt;</span></span></span><span class="xml">;</span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  order:         <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">integer</span></span>&gt;</span></span></span><span class="xml">;</span></span>
+}
+</code></pre>
+
+<p>Flex项目可以使用这个简单的属性得新排序，而不需要重新修改HTML代码。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-order.jpg" alt="order" title="order"></p>
+
+<p>默认值： <code>0</code></p>
+
+<h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a><strong><code>flex-grow</code></strong></h3><p>这个属性用来指定 flex项目的放大比例，其决定了flex项目相对flex容器自由空间进行放大。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="javascript"><code class="javascript">.flex-item {
+  -webkit-flex-grow: <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">number</span></span>&gt;</span></span></span><span class="xml">;</span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  flex-grow:         <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">number</span></span>&gt;</span></span></span><span class="xml">;</span></span>
+}
+</code></pre>
+
+<p>如果所有flex项目的<code>flex-grow</code>值相同，那么flex项目在flex容器中具有相同的尺寸。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-grow-1.jpg" alt="flex-grow" title="flex-grow"></p>
+
+<p>第二个flex项目相对于其他的flex项目占有更多的空间。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-grow-2.jpg" alt="flex-grow" title="flex-grow"></p>
+
+<p>默认值： <code>0</code></p>
+
+<p><strong>注意：</strong>负数无效。</p>
+
+<h3 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a><strong><code>flex-shrink</code></strong></h3><p><code>flex-shrink</code>属性用来指定flex项目缩小比例。决定了flex项目将会相对于其他flex项目在flex容器空间不足之下自动收缩。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="javascript"><code class="javascript">.flex-item {
+  -webkit-flex-shrink: <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">number</span></span>&gt;</span></span></span><span class="xml">;</span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  flex-shrink:         <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">number</span></span>&gt;</span></span></span><span class="xml">;</span></span>
+}
+</code></pre>
+
+<p>默认情况之下，所有flex项目都可以收缩，但如果将它们设置为<code>0</code>时，他们不会缩小会保持原来的大小。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-shrink.jpg" alt="flex-shrink" title="flex-shrink"></p>
+
+<p>默认值：<code>0</code></p>
+
+<p><strong>注意：</strong>负数无效。</p>
+
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a><strong><code>flex-basis</code></strong></h3><p>这个属性和<code>width</code>和<code>height</code>属性相同，用来指定flex项目的大小。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="javascript"><code class="javascript">.flex-item {
+  -webkit-flex-basis: auto | <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">width</span></span>&gt;</span></span></span><span class="xml">;</span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  flex-basis:         auto | <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">width</span></span>&gt;</span></span></span><span class="xml">;</span></span>
+}
+</code></pre>
+
+<p><code>flex-basis</code>指定了第四个flex项目的初始尺寸。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-flex-basis.jpg" alt="flex-basis" title="flex-basis"></p>
+
+<p>默认值：<code>auto</code></p>
+
+<p><strong>注意：</strong>取值为<code>auto</code>时还有一个<a href="http://www.w3.org/TR/css-flexbox/#valdef-flex-basis-main-size" target="_blank">问题</a>有待于将来解决。</p>
+
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a><strong><code>flex</code></strong></h3><p>这个属性是<code>flex-grow</code>、<code>flex-shrink</code>和<code>flex-basis</code>属性的简写。其他值可以设置为<code>auto</code>(<code>1 1 auto</code>)和<code>non</code>(<code>0 0 auto</code>)。</p>
+
+<pre class="javascript"><code class="javascript">.flex-item {
+  -webkit-flex: none | auto | [ <span class="xml"><span class="tag"><span class="xml"><span class="tag">&lt;<span class="title"><span class="title">flex-grow</span></span>&gt;</span></span></span><span class="xml"> <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-shrink</span></span>&gt;</span></span>? || <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-basis</span></span>&gt;</span></span> ]; /* Safari */
+  flex:         none | auto | [ <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-grow</span></span>&gt;</span></span> <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-shrink</span></span>&gt;</span></span>? || <span class="tag"><span class="tag">&lt;<span class="title"><span class="title">flex-basis</span></span>&gt;</span></span> ];
+}
+</span></span></code></pre>
+
+<p>默认值：<code>0 1 auto</code></p>
+
+<p><em>* 注意：</em>W3C鼓励使用简写方式，而不是使用单独的属性，可以使用简写重置<a href="http://www.w3.org/TR/css-flexbox/#flex-common" target="_blank">不明组件一起使用</a>。</p>
+
+<h3 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a><strong><code>align-self</code></strong></h3><p>使用<code>align-self</code>属性可以指定flex项目自身的对齐方式或者使用<code>align-items</code>来指定单个flex项目。使用<code>align-items</code>对齐方式来解释<a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties#align-items" target="_blank">flex容器</a>，能更好的理解他们的值。</p>
+
+<p><strong>属性值：</strong></p>
+
+<pre class="css"><code class="css"><span class="class"><span class="class">.flex-item</span></span> <span class="rules"><span class="rules">{
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">-webkit-align-self</span></span></span><span class="rule">:<span class="value"><span class="value"> auto | flex-start | flex-end | center | baseline | stretch;</span></span></span><span class="value"></span></span> <span class="comment"><span class="comment">/* Safari */</span></span>
+  <span class="rule"><span class="attribute"><span class="rule"><span class="attribute">align-self</span></span></span><span class="rule">:<span class="value"><span class="value">         auto | flex-start | flex-end | center | baseline | stretch;</span></span></span><span class="value"></span></span>
+<span class="rule"><span class="rule">}</span></span></span><span class="rule"></span></span>
+</code></pre>
+
+<p>第三个和第四个flex项目使用<code>align-self</code>属性覆盖了其默认的对齐方式。</p>
+
+<p><img src="http://www.w3cplus.com/sites/default/files/blogs/2015/1504/flexbox-align-self.jpg" alt="align-self" title="align-self"></p>
+
+<p>默认值：<code>auto</code></p>
+
+<p><strong>注意：</strong><code>align-self</code>取值为<code>auto</code>值时，flex项目对齐方式会根据其父元素<code>align-items</code>来决定。如果其元素设置为<code>stretch</code>值时或没有父元素时，<code>align-self</code>的值为<code>auto</code>时将无对齐方式一说。</p>
+
+<h3 id="flex项目无效属性"><a href="#flex项目无效属性" class="headerlink" title="flex项目无效属性"></a><strong>flex项目无效属性</strong></h3><p><code>float</code>，<code>clear</code>和<code>vertical-align</code>属性应用在flex项目上将会无效和无法将其out-of-flow</p>
+<p>可以点击<a href="https://scotch.io/demos/visual-guide-to-css3-flexbox-flexbox-playground" target="_blank">这里</a>全屏查看DEMO，也可以在<a href="https://github.com/imjustd/flexbox-playground" target="_blank">Github</a>上获取源码。</p>
+
+<blockquote><br>  <p>本文根据<a href="https://scotch.io/author/dimitar" target="_blank">@ Dimitar Stojanov</a>的《<a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank">A Visual Guide to CSS3 Flexbox Properties</a>》所译，整个译文带有我们自己的理解与思想，如果译得不好或有不对之处还请同行朋友指点。如需转载此译文，需注明英文出处：<a href="https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties" target="_blank">https://scotch.io/tutorials/a-visual-guide-to-css3-flexbox-properties</a>。</p><br></blockquote>
+
+<p></p><p>如需转载，烦请注明出处：<a href="http://www.w3cplus.com/css3/a-visual-guide-to-css3-flexbox-properties.html" target="_blank">http://www.w3cplus.com/css3/a-visual-guide-to-css3-flexbox-properties.html</a></p><br>  <p></p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info">Geolage Wu</span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info">https://geolage.github.io/blog/2017/10/01/图解CSS3-Flexbox属性（转）/</span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/CSS/">CSS</a><a class="post-meta__tags" href="/blog/tags/Flexbox/">Flexbox</a><a class="post-meta__tags" href="/blog/tags/弹性布局/">弹性布局</a></div></article><nav id="pagination"><div class="prev-post pull-left"><a href="/blog/2017/10/02/浅谈CSS（样式）的优先级/"><i class="fa fa-chevron-left">  </i><span>浅谈 CSS（样式）的优先级</span></a></div><div class="next-post pull-right"><a href="/blog/2017/09/30/浅谈JS中的call、apply和bind/"><span>浅谈JS中的call、apply和bind</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var disqus_config = function () {
+  this.page.url = 'https://geolage.github.io/blog/2017/10/01/图解CSS3-Flexbox属性（转）/';
+  this.page.identifier = '2017/10/01/图解CSS3-Flexbox属性（转）/';
+  this.page.title = '图解CSS3 Flexbox属性（转）';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://geolage.disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://geolage.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">©2014 - 2017 By Geolage Wu</div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/blog/js/third-party/anime.min.js"></script><script src="/blog/js/third-party/jquery.min.js"></script><script src="/blog/js/third-party/jquery.fancybox.min.js"></script><script src="/blog/js/third-party/velocity.min.js"></script><script src="/blog/js/third-party/velocity.ui.min.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/fancybox.js"></script><script src="/blog/js/sidebar.js"></script><script src="/blog/js/copy.js"></script><script src="/blog/js/fireworks.js"></script><script src="/blog/js/transition.js"></script><script src="/blog/js/scroll.js"></script><script src="/blog/js/head.js"></script><script src="/blog/js/main.js"></script></body></html>
