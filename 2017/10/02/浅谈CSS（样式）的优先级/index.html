@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>浅谈 CSS（样式）的优先级 - Geolage's Blog</title><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"><script>var GLOBAL = { 
+  root: '/blog/',
+  algolia: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  }
+} </script><link rel="icon" href="/blog/favicon.ico"></head><body><canvas class="fireworks"></canvas><i class="fa fa-bars" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="切换文章详情">切换站点概览</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#样式配置方式"><span class="toc-number">1.</span> <span class="toc-text">样式配置方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选择器的优先级"><span class="toc-number">2.</span> <span class="toc-text">选择器的优先级</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#优先权-Specificity"><span class="toc-number">2.1.</span> <span class="toc-text">优先权(Specificity)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户样式"><span class="toc-number">3.</span> <span class="toc-text">用户样式</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/blog//img/avatar.jpg"></div><div class="author-info__name text-center">Geolage Wu</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/blog/archives"><span class="pull-left">文章</span><span class="pull-right">8</span></a><a class="author-info-articles__tags article-meta" href="/blog/tags"><span class="pull-left">标签</span><span class="pull-right">23</span></a><a class="author-info-articles__categories article-meta" href="/blog/categories"><span class="pull-left">分类</span><span class="pull-right">9</span></a></div><hr><div class="author-info-links"><div class="author-info-links__title text-center">相关链接</div><a class="author-info-links__name text-center" href="https://www.higherloft.com" target="_blank">HigherLoft</a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/blog/img/top2.jpg);"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/blog/">Geolage's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/blog/">主页</a><a class="site-page" href="/blog/archives">文章</a><a class="site-page" href="/blog/tags">标签</a><a class="site-page" href="/blog/categories">分类</a></span></div><div id="post-info"><div id="post-title">浅谈 CSS（样式）的优先级</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-10-02 </time><span class="post-meta__separator"> | </span><i class="fa fa-inbox" aria-hidden="true"> </i><a class="post-meta__categories" href="/blog/categories/前端/"> 前端  </a><i class="fa fa-angle-right" aria-hidden="true"> </i><i class="fa fa-inbox" aria-hidden="true"> </i><a class="post-meta__categories" href="/blog/categories/前端/CSS/"> CSS  </a><span class="post-meta__separator"> | </span><i class="fa fa-comment-o" aria-hidden="true"> </i><a href="/blog/2017/10/02/浅谈CSS（样式）的优先级/#disqus_thread"><span class="disqus-comment-count" data-disqus-identifier="2017/10/02/浅谈CSS（样式）的优先级/"></span></a></div></div></div><div class="layout" id="content-inner"><article id="post"><div id="post-content"><p>&emsp;&emsp;对于CSS（样式）优先级的问题，大家在开发过程中都必然或多或少的遇到过，谈及也不下千万次。要想处理好优先级可能带来的各种不协调和莫名其妙的“反人类”问题，就要重新回到这个问题最基本的层面上，找准根源、认真分析，才能知其所以然，悉症结所在，方能药到病除，与此同时也可以尽可能地少范一些“不太严谨”的毛病和看似“无所谓”的错误。<br><a id="more"></a></p>
+<h3 id="样式配置方式"><a href="#样式配置方式" class="headerlink" title="样式配置方式"></a><strong>样式配置方式</strong></h3><p>网页配置样式的方式无非三种：</p>
+<ol>
+<li><strong>内联</strong>（行内）<strong>样式</strong>（Inline Style）</li>
+<li><strong>内嵌样式</strong>（Embedding Style）</li>
+<li><strong>外联</strong>（引用）<strong>样式</strong>（Linking Style）</li>
+</ol>
+<p><em>P.S. 还有一种是使用<strong>@import</strong>的方式引入样式</em></p>
+<p> 先来简单温习一下其格式：</p>
+<blockquote>
+<ol>
+<li><strong><code>&lt;tag ... style=&quot; ... &quot;&gt; [&lt;/tag&gt;]</code></strong></li>
+<li><strong><code>&lt;style&gt; ... &lt;/style&gt;</code></strong></li>
+<li><strong><code>&lt;link href=&quot; * .css &quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;</code></strong></li>
+<li><strong><code>@import [ url( ] &quot;* .css &quot; [ ) ]</code></strong></li>
+</ol>
+</blockquote>
+<p> 我们知道，在一般情况下，其优先级是：<strong>1&gt;2&gt;3</strong>。但由于在网站开发过程中可能存在的诸多原因，会导致样式呈现出非意料之中的效果。这就需要我们通过测试工具来排查样式优先级可能存在的不当。</p>
+<p>当然，这些简单的知识大家都已经很熟悉了，没有涉及比较复杂的原理，但很多人也不知其为何究竟如此。下面我们进一步来深入分析一下优先级的问题。</p>
+<h3 id="选择器的优先级"><a href="#选择器的优先级" class="headerlink" title="选择器的优先级"></a><strong>选择器的优先级</strong></h3><p>外部引用样式的css文件中，由于选择器的层级、格式、次序的不同亦产生样式优先级问题。</p>
+<h4 id="优先权-Specificity"><a href="#优先权-Specificity" class="headerlink" title="优先权(Specificity)"></a><strong>优先权(Specificity)</strong></h4><p>一个选择器的优先权由四个权值组成：</p>
+<blockquote>
+<p><strong>默认值</strong>：（0，0，0，0），因选择器不同而权重各不相同<br>Rule No.1：<strong>内联样式</strong>权重最高，以（<strong>1</strong>，0，0，0）表示；<br>Rule No.2：<strong>ID选择器</strong>权重次之，以 （0，<strong>1</strong>，0，0）表示；<br>Rule No.3：<strong>类、属性、伪类选择器</strong>，以（0，0，<strong>1</strong>，0）表示；<br>Rule No.4：<strong>标签和伪元素选择器</strong>权重是最基准的，以（0，0，0，<strong>1</strong>）表示；<br>Rule No.5：<strong>通配符（*）选择器</strong>，权重最低，值为<strong>0</strong>，以（0，0，0，0）表示。</p>
+</blockquote>
+<p>举个栗子:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">HEAD</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">STYLE</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css">  <span class="selector-id">#x97z</span> &#123; <span class="attribute">color</span>: red &#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">STYLE</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">HEAD</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">BODY</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">P</span> <span class="attr">ID</span>=<span class="string">x97z</span> <span class="attr">style</span>=<span class="string">"color: green"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">BODY</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>分析：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">*                   &#123;&#125;      <span class="comment">/* a=0 b=0 c=0 d=0 -&gt; specificity = 0,0,0,0 */</span></div><div class="line"><span class="selector-tag">li</span>                  &#123;&#125;      <span class="comment">/* a=0 b=0 c=0 d=1 -&gt; specificity = 0,0,0,1 */</span></div><div class="line"><span class="selector-tag">li</span><span class="selector-pseudo">:first-line</span>       &#123;&#125;      <span class="comment">/* a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 */</span></div><div class="line"><span class="selector-tag">ul</span> <span class="selector-tag">li</span>               &#123;&#125;      <span class="comment">/* a=0 b=0 c=0 d=2 -&gt; specificity = 0,0,0,2 */</span></div><div class="line"><span class="selector-tag">ul</span> <span class="selector-tag">ol</span>+<span class="selector-tag">li</span>            &#123;&#125;      <span class="comment">/* a=0 b=0 c=0 d=3 -&gt; specificity = 0,0,0,3 */</span></div><div class="line"><span class="selector-tag">h1</span> + *<span class="selector-attr">[rel=up]</span>      &#123;&#125;      <span class="comment">/* a=0 b=0 c=1 d=1 -&gt; specificity = 0,0,1,1 */</span></div><div class="line"><span class="selector-tag">ul</span> <span class="selector-tag">ol</span> <span class="selector-tag">li</span><span class="selector-class">.red</span>        &#123;&#125;     <span class="comment">/* a=0 b=0 c=1 d=3 -&gt; specificity = 0,0,1,3 */</span></div><div class="line"><span class="selector-tag">li</span><span class="selector-class">.red</span><span class="selector-class">.level</span>        &#123;&#125;     <span class="comment">/* a=0 b=0 c=2 d=1 -&gt; specificity = 0,0,2,1 */</span></div><div class="line"><span class="selector-id">#x34y</span>               &#123;&#125;     <span class="comment">/* a=0 b=1 c=0 d=0 -&gt; specificity = 0,1,0,0 */</span></div><div class="line">style=""                 /* a=1 b=0 c=0 d=0 -&gt; specificity = 1,0,0,0 */</div></pre></td></tr></table></figure>
+<p>需要注意的是，在样式表中如果添加了” ! important “的字样，则其优先级最高，优先级顺序变为：</p>
+<blockquote>
+<p><strong>! important &gt; 内联样式 &gt; ID &gt; Class | 伪类 | 属性 &gt; 标签 | 伪元素 &gt; 继承 &gt; 通配符</strong></p>
+</blockquote>
+<p>还是那句老话：多看文档。多浏览几遍W3的文档，就会对这一问题豁然开朗了。</p>
+<p>详细说明请查阅：<a href="https://www.w3.org/TR/CSS22/cascade.html" title="W3层叠样式表规则" target="_blank" rel="external">W3 Cascade Rules</a>  &amp;  <a href="https://www.w3.org/TR/CSS/" title="W3 CSS" target="_blank" rel="external">W3 CSS</a></p>
+<h3 id="用户样式"><a href="#用户样式" class="headerlink" title="用户样式"></a><strong>用户样式</strong></h3><p>以上所谈到的都是基于网页开发者的角度而编写的CSS，故此来源亦可称为<strong>“作者”样式</strong>（Author StyleSheet）。但样式如果就从用户的角度来谈，一般还需考虑另外两种样式来源：<strong>“读者”样式</strong>（User StyleSheet）、<strong>用户代理样式</strong>（User Agent StyleSheet）。</p>
+<blockquote>
+<p><strong>读者</strong>，即浏览网页的用户，可以通过一些手段来修改HTML页面元素的样式（Firefox的 Firebug）*</p>
+<p><strong>用户代理</strong>，通常指浏览器，一些浏览器可以通过设置选项来修改页面元素的样式。*</p>
+</blockquote>
+<p>以上优先级可以大致概为：</p>
+<blockquote>
+<p><strong><font color="red">User</font> declarations</strong>（<strong><em>!important</em></strong>）&gt; <strong><font color="red">Author</font>  declarations</strong>（<strong><em>!important</em></strong>）&gt;<br><strong><font color="red">Author</font></strong> <strong>declarations</strong>（<em>normal</em>）&gt; <strong><font color="red">User</font></strong>  <strong>declarations</strong>（<em>normal</em>）&gt; <strong><font color="red">User Agent</font></strong> stylesheet</p>
+</blockquote>
+<p>具体描述请参考：<a href="http://www.cnblogs.com/ttcc/p/3853158.html" title="用户样式优先级" target="_blank" rel="external">用户样式优先级</a></p>
+<p>因此，按照来源排序，其样式的优先级为：</p>
+<ol>
+<li><p><strong>用户</strong>设置的<strong>重要</strong>样式。</p>
+</li>
+<li><p><strong>作者</strong>编写的<strong>重要</strong>样式。</p>
+</li>
+<li><p><strong>作者</strong>编写的<strong>一般</strong>样式。</p>
+</li>
+<li><p><strong>用户</strong>设置的<strong>一般</strong>样式。</p>
+</li>
+<li><p><strong>浏览器</strong>设置的样式。</p>
+</li>
+</ol>
+<p><em>P.S. 注意，一些用户样式在 FF、IE 上的渲染效果会有所不同。</em></p>
+<p>综上，可以总结出以下适用性规则：</p>
+<ol>
+<li>选择器的权重由四项数值累加，故<strong>权值越大越优先</strong>；</li>
+<li>当权值相等时，<strong>越后出现的样式越优先</strong>。继承样式将被后面指定的样式所替换；</li>
+<li><strong>创作者规则高于浏览者</strong>：开发者设置的CSS优先权高于浏览器所设置；</li>
+<li>同一对象所配置的样式中<strong>含“!important”标记的优先级最大</strong>。</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info">Geolage Wu</span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info">https://geolage.github.io/blog/2017/10/02/浅谈CSS（样式）的优先级/</span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/CSS/">CSS</a><a class="post-meta__tags" href="/blog/tags/样式优先级/">样式优先级</a></div></article><nav id="pagination"><div class="next-post pull-right"><a href="/blog/2017/10/01/图解CSS3-Flexbox属性（转）/"><span>图解CSS3 Flexbox属性（转）</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="disqus_thread"></div><script>var disqus_config = function () {
+  this.page.url = 'https://geolage.github.io/blog/2017/10/02/浅谈CSS（样式）的优先级/';
+  this.page.identifier = '2017/10/02/浅谈CSS（样式）的优先级/';
+  this.page.title = '浅谈 CSS（样式）的优先级';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://geolage.disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script><script id="dsq-count-src" src="https://geolage.disqus.com/count.js" async></script></div></div><footer><div class="layout" id="footer"><div class="copyright">©2014 - 2017 By Geolage Wu</div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/blog/js/third-party/anime.min.js"></script><script src="/blog/js/third-party/jquery.min.js"></script><script src="/blog/js/third-party/jquery.fancybox.min.js"></script><script src="/blog/js/third-party/velocity.min.js"></script><script src="/blog/js/third-party/velocity.ui.min.js"></script><script src="/blog/js/utils.js"></script><script src="/blog/js/fancybox.js"></script><script src="/blog/js/sidebar.js"></script><script src="/blog/js/copy.js"></script><script src="/blog/js/fireworks.js"></script><script src="/blog/js/transition.js"></script><script src="/blog/js/scroll.js"></script><script src="/blog/js/head.js"></script><script src="/blog/js/main.js"></script></body></html>
